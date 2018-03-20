@@ -2,8 +2,7 @@
 
 void RunGame (RenderWindow &window) {
 	
-		
-
+	    srand(time(NULL));
 		Image background;
 		background.loadFromFile("images/Gr.png");
 		Texture backgroundTexture;
@@ -30,12 +29,13 @@ void RunGame (RenderWindow &window) {
 		Font font;
 		font.loadFromFile("7526.ttf");
 		Text text("", font, 20);
-
+		Text text2("", font, 20);
+		int y = 20 + rand() % 300;
 		Clock clock;
 		bool lose = false;
 		Player p(playerSprite, 2, 100);
 		Player2 p2(player2Sprite, 585, 100);
-		Ball b(ballSprite,300, 150);
+		Ball b(ballSprite,300, y);
 		while (window.isOpen())
 		{
 			float time = clock.getElapsedTime().asMicroseconds();
@@ -85,7 +85,6 @@ void RunGame (RenderWindow &window) {
 			if (b.x < 300)
 				p2.dy = 0;
 
-
 			std::ostringstream pointsP, pointsP2;
 			pointsP << points1;
 			pointsP2 << points2;
@@ -94,7 +93,8 @@ void RunGame (RenderWindow &window) {
 			window.draw(text);
 
 			window.display();
-			if (lose == true)
+			if (lose == true) {
 				RunGame(window);
+			}
 		}
 }
